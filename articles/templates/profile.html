@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Profile</title>
+</head>
+<body>
+    <a href="{% url 'article-list' %}"><button>Back</button></a>
+    <a href="{% url 'profile-edit' %}"><button>Edit</button></a>
+    <p>First Name: {{ user.first_name }}</p>
+    <p>Last Name: {{ user.last_name }}</p>
+    <p>Email: {{ user.email }}</p>
+    {% if user.profile.about %}
+        <p>About Me: {{ user.profile.about }}</p>
+    {% endif %}
+</body>
+</html>

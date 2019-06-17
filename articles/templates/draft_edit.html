@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Write!</title>
+</head>
+<body>
+    <form action="{% url 'draft-edit' draft.slug %}" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" name="publish" value="Publish">
+        <input type="submit" name="draft" value="Save as draft">
+    </form>
+    <a href="{% url 'draft-list' %}"><button>Cancel</button></a>
+    <a href="{% url 'draft-delete' draft.slug %}"><button>Delete</button></a>
+</body>
+</html>
