@@ -1,4 +1,6 @@
 import markdown
+import bleach
+from bleach_whitelist import markdown_tags, markdown_attrs
 from django import template
 from django.template.defaultfilters import stringfilter
 from markdown.extensions.codehilite import CodeHiliteExtension
@@ -12,4 +14,4 @@ extension_list = [
 @register.filter
 @stringfilter
 def makemarkdown(value):
-    return markdown.markdown(value, extensions=extension_list)
+    return bleach.clean(markdown.markdown(value), markdown_tags, markdown_attrs)

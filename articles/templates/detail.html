@@ -13,7 +13,7 @@
     <p>Published by: <a href="/profiles/{{ article.author.username }}/">{{ article.author.first_name }} {{ article.author.last_name }}</a></p>
     <p>{{ article.published|timesince }} ago</p>
     <p>{{ article.title }}</p>
-    <p>{{ article.body|makemarkdown:"safe" }}</p>
+    <p>{{ article.body|makemarkdown|safe }}</p>
     <button onclick="copyToClipboard('{{ request.build_absolute_uri }}')">
         Share Link
     </button>

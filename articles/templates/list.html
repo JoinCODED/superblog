@@ -1,42 +1,17 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>List Page</title>
-</head>
-<body>
-    {% if request.user.is_authenticated %}
-        <a href="{% url 'logout' %}"><button>
-            Logout
-        </button></a>
-        <a href="{% url 'profile' %}"><button>
-            Profile
-        </button></a>
-        <a href="{% url 'article-create' %}"><button>
-            Write!
-        </button></a>
-        <a href="{% url 'draft-list' %}">
-            <button>
-                Drafts
-            </button>
-        </a>
-    {% else %}
-        <a href="{% url 'register' %}"><button>
-            Register
-        </button></a>
-        <a href="{% url 'login' %}">
-            <button>
-                Login
-            </button>
-        </a>
-    {% endif %}
-    <ul>
-        {% for article in articles %}
-            <li>
-                <a href="{% url 'article-detail' article.slug %}">
-                    {{ article.title }}
-                </a>
-            </li>
-        {% endfor %}
-    </ul>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}
+List Page
+{% endblock %}
+
+{% block body %}
+<ul>
+    {% for article in articles %}
+        <li>
+            <a href="{% url 'article-detail' article.slug %}">
+                {{ article.title }}
+            </a>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}
