@@ -14,4 +14,4 @@ class Article(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    about = models.TextField(null=True, blank=True)
+    description = models.TextField(null=True, blank=True)

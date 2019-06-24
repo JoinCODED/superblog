@@ -1,18 +1,21 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Write!</title>
-</head>
-<body>
-    <form action="{% url 'profile-edit' %}" method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" class="btn btn-primary">
-    </form>
-    <a href="{% url 'profile' %}">
-        <button>
-            Cancel
-        </button>
-    </a>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}
+Profile Edit Page
+{% endblock %}
+
+{% block body %}
+<div class="card my-4">
+    <h5 class="card-header">Edit your description!</h5>
+    <div class="card-body">
+        <form action="{% url 'profile-edit' %}" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_description">Description</label>
+                <textarea class="form-control" id="id_description" placeholder="Write here..." rows="5" name="description">{{ form.description.value }}</textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

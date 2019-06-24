@@ -1,16 +1,45 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Profile</title>
-</head>
-<body>
-    <a href="{% url 'article-list' %}"><button>Back</button></a>
-    <a href="{% url 'profile-edit' %}"><button>Edit</button></a>
-    <p>First Name: {{ user.first_name }}</p>
-    <p>Last Name: {{ user.last_name }}</p>
-    <p>Email: {{ user.email }}</p>
-    {% if user.profile.about %}
-        <p>About Me: {{ user.profile.about }}</p>
-    {% endif %}
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}
+Profile
+{% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card mb-4">
+            <h2 class="card-header">{{ user.username }} <a href="{% url 'profile-edit' %}"><button class="btn btn-outline-success">Edit</button></a></h2>
+            <div class="card-body">
+                <p class="card-text">
+                    First Name: {{ user.first_name }}
+                </p>
+                <p class="card-text">
+                    Last Name: {{ user.last_name }}
+                </p>
+                <p class="card-text">
+                    Email: {{ user.email }}
+                </p>
+                {% if user.profile.description %}
+                    <p class="card-text">
+                        Description: {{ user.profile.description }}
+                    </p>
+                {% endif %}
+            </div>
+        </div>
+        {% if not articles %}
+            You have not published any articles.
+        {% else %}
+            {% for article in articles %}
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h2 class="card-title"><a href="{% url 'article-detail' article.slug %}">{{ article.title }}</a></h2>
+                    </div>
+                    <div class="card-footer text-muted">
+                        Published on {{ article.published }}
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

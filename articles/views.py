@@ -52,7 +52,8 @@ def draft_delete(request, article_slug):
 def draft_list(request):
     drafts_list = Article.objects.filter(draft=True, author=request.user)
     context = {
-        'drafts': drafts_list
+        'drafts': drafts_list,
+        'draft_tab_status': "active"
     }
     return render(request, "draft_list.html", context)
 
@@ -67,8 +68,9 @@ def draft_edit(request, article_slug):
             if form.data.get("title") != article.title:
                 article.slug = create_slug(article)
             article.save()
-            if 'publish' in form.data:
+            if 'draft' not in form.data:
                 article.draft = False
+                article.published = now()
                 article.save()
                 return redirect("article-detail", article_slug=article.slug)
             return redirect('draft-list')

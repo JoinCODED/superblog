@@ -1,22 +1,35 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Drafts Page</title>
-</head>
-<body>
-    <a href="{% url 'article-list' %}">
-        <button>
-            Back
-        </button>
-    </a>
-    <ul>
-        {% for draft in drafts %}
-            <li>
-                <a href="/drafts/{{ draft.slug }}/">
-                    {{ draft.title }}
-                </a>
-            </li>
-        {% endfor %}
-    </ul>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}
+Drafts List Page
+{% endblock %}
+
+{% block body %}
+<div class="row">
+
+  <!-- Blog Entries Column -->
+  <div class="col-12">
+
+    <h1 class="my-4">Super Blog
+      <small>Your Drafts</small>
+    </h1>
+
+    {% for draft in drafts %}
+      <div class="card mb-4">
+        <div class="card-body">
+          <h2 class="card-title">
+            <a href="{% url 'draft-edit' draft.slug %}">
+              {{ draft.title }}
+            </a>
+          </h2>
+        </div>
+        <div class="card-footer text-muted">
+          Created on {{ draft.created }}
+        </div>
+      </div>
+    {% endfor %}
+
+  </div>
+</div>
+<!-- /.row -->
+{% endblock %}

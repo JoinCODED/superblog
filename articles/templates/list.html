@@ -5,13 +5,27 @@ List Page
 {% endblock %}
 
 {% block body %}
-<ul>
+<div class="row">
+
+  <!-- Blog Entries Column -->
+  <div class="col-12">
+
+    <h1 class="my-4">Super Blog
+      <small>All Articles</small>
+    </h1>
+
     {% for article in articles %}
-        <li>
-            <a href="{% url 'article-detail' article.slug %}">
-                {{ article.title }}
-            </a>
-        </li>
+      <div class="card mb-4">
+        <div class="card-body">
+          <h2 class="card-title"><a href="{% url 'article-detail' article.slug %}">{{ article.title }}</a></h2>
+        </div>
+        <div class="card-footer text-muted">
+          Published on {{ article.published }} by <a href="{% url 'author-profile' article.author.username %}">{{ article.author.username }}</a>
+        </div>
+      </div>
     {% endfor %}
-</ul>
+
+  </div>
+</div>
+<!-- /.row -->
 {% endblock %}

@@ -1,30 +1,53 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Register</title>
-</head>
-<body>
-    <form action="/register/" method="POST">
-        {% csrf_token %}
-        {% for field in form %}
-          <div class="fieldWrapper">
-            {{ field.label_tag }} {{ field }}
-            {% if field.help_text %}
-              <span class="help">{{ field.help_text|safe }}</span>
-            {% endif %}
-            {% if field.errors %}
-                {% for error in field.errors %}
-                    <br><strong>{{ error|escape }}</strong><br>
-                {% endfor %}
-            {% endif %}
-          </div>
-        {% endfor %}
-        <input type="submit">
-    </form>
-    <a href="{% url 'article-list' %}">
-        <button>
-            Cancel
-        </button>
-    </a>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}
+Register Page
+{% endblock %}
+
+{% block body %}
+<div class="card my-4">
+    <h5 class="card-header">Register</h5>
+    <div class="card-body">
+        <form action="{% url 'register' %}" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_username">Username</label>
+                {% if form.username.errors %}
+                    {% for error in form.username.errors %}
+                        <br><strong>{{ error|escape }}</strong>
+                    {% endfor %}
+                {% endif %}
+                <input type="text" class="form-control" id="id_username" aria-describedby="usernameHelp" placeholder="Enter Username" name="username">
+                <small id="usernameHelp" class="form-text text-muted">{{ form.username.help_text }}</small>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                {% if form.password.errors %}
+                    {% for error in form.password.errors %}
+                        <br><strong>{{ error|escape }}</strong>
+                    {% endfor %}
+                {% endif %}
+                <input type="password" class="form-control" id="id_password" placeholder="Enter Password" name="password">
+            </div>
+            <div class="form-group">
+                <label for="id_email">Email Address</label>
+                {% if form.email.errors %}
+                    {% for error in form.email.errors %}
+                        <br><strong>{{ error|escape }}</strong>
+                    {% endfor %}
+                {% endif %}
+                <input type="email" class="form-control" id="id_email" placeholder="Enter Email" name="email">
+            </div>
+            <div class="form-group">
+                <label for="id_first_name">First Name</label>
+                <input type="first_name" class="form-control" id="id_first_name" placeholder="Enter First Name" name="first_name">
+            </div>
+            <div class="form-group">
+                <label for="id_last_name">Last Name</label>
+                <input type="last_name" class="form-control" id="id_last_name" placeholder="Enter Last Name" name="last_name">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
