@@ -25,7 +25,7 @@ SECRET_KEY = 'w$-%$^8m3+w$si57ljsm46+r)7(%r*%7fpm_@v(wu3@n*7_xp7'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['46.101.150.243', '127.0.0.1', 'superblog.codeunicorn.io', 'codeunicorn.io']
 
 
 # Application definition
