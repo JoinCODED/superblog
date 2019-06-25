@@ -29,6 +29,10 @@ Temporary Items
 __pycache__/
 *.py[cod]
 *.pyc
+articles/__pycache__/*
+articles/migrations/__pycache__/*
+articles/templatetags/__pycache__/*
+superblog/__pycache__/*
 
 # C extensions
 *.so
